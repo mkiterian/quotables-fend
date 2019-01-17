@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import requestRegister from "../../actions/authActions";
+
 class Register extends Component {
   constructor() {
     super();
@@ -16,4 +18,6 @@ class Register extends Component {
   }
 }
 
-export default connect()(Register);
+const mapStateToProps = state => {}
+
+export default connect(mapStateToProps, { requestRegister })(Register);
