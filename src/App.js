@@ -1,20 +1,12 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import reduxThunk from "redux-thunk";
-import reducers from "./reducers";
+
 import Home from "./components/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import "./App.css";
-
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-
-const store = createStore(
-  reducers,
-  composeEnhancer(applyMiddleware(reduxThunk)),
-);
+import store from "./store";
 
 class App extends Component {
   render() {
