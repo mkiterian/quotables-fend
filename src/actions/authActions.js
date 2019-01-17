@@ -1,5 +1,6 @@
 import * as constants from "../constants";
 import axios from "axios";
+import config from "../config";
 
 export const registerRequest = () => {
   return {
@@ -14,20 +15,20 @@ export const registerFailure = error => (
   }
 );
 
-export const registerSuccess = user => (
+export const registerSuccess = (user) => {
+  return (
   {
     type: constants.REGISTER_SUCCESS,
-    user,
+    payload: user,
   }
-);
+);}
 
 export const registerUser = newUser => (
   (dispatch) => {
     dispatch(registerRequest());
-    return axios.post("http://localhost:5000/users", newUser)
+    return axios.post(`${config.API_BASE}/users`, newUser)
       .then((response) => {
-        console.log(response);
-        dispatch(registerSuccess(response.data.data));
+        dispatch(registerSuccess(response.data));
       })
       .catch((error) => { dispatch(registerFailure(error)); });
   }

@@ -9,7 +9,6 @@ class Register extends Component {
     this.state = {
       email: "",
       password: "",
-      confirmPassword: "",
       errors: {}
     };
   }
@@ -27,8 +26,7 @@ class Register extends Component {
   };
 
   render() {
-    const { email, password, confirmPassword } = this.state;
-    console.log(this.props.auth);
+    const { email, password } = this.state;
     return (
       <div>
         <form onSubmit={this.onSubmit}>
@@ -51,17 +49,6 @@ class Register extends Component {
               id="password"
               className="form-control"
               value={password}
-              onChange={this.onChange}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              className="form-control"
-              value={confirmPassword}
               onChange={this.onChange}
             />
           </div>
