@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class Register extends Component {
   constructor() {
@@ -15,4 +16,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default connect()(Register);
