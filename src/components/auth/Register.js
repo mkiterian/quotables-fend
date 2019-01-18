@@ -13,8 +13,10 @@ class Register extends Component {
     };
   }
 
-  componentDidMount(){
-    this.props.history.push("/quotes");
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/quotes");
+    }
   }
 
   onChange = e => {

@@ -8,12 +8,14 @@ class Login extends Component {
     super();
     this.state = {
       email: "",
-      password: "",
+      password: ""
     };
   }
 
-  componentDidMount(){
-    this.props.history.push("/quotes");
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/quotes");
+    }
   }
 
   onChange = e => {
