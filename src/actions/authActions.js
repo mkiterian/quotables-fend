@@ -60,6 +60,7 @@ export const loginUser = credentials => (
     dispatch(loginRequest());
     return axios.post(`${config.API_BASE}/users/login`, credentials)
       .then((response) => {
+        localStorage.setItem("x-auth", response.headers["x-auth"]);
         dispatch(loginSuccess(response.data));
       })
       .catch((error) => { dispatch(loginFailure(error)); });

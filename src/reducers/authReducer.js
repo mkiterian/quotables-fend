@@ -1,7 +1,7 @@
 import * as constants from "../constants";
 
 const initialState = {
-  isAuthenticated: false,
+  isAuthenticated: localStorage.getItem("access_token") ? true : false,
   user: {},
   isFetching: false
 };
