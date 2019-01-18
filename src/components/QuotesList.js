@@ -24,10 +24,13 @@ class QuotesList extends Component {
     });
   }
 
-  filterQuotes = (criteria, value) => {
-    const { quotes } = this.state;
+  filterQuotes = (criteria, value, quotes) => {
     const filteredQuotes = quotes.filter(quote => quote[criteria] === value);
     this.setState({ filteredQuotes, showByFilter: true });
+  };
+
+  resetFilter = () => {
+    this.setState({ showByFilter: false });
   };
 
   renderQuotes = quotes => {
@@ -45,11 +48,12 @@ class QuotesList extends Component {
   };
 
   renderYearButtons = years => {
+    const { quotes } = this.state;
     return years.map(year => (
       <button
         className="btn btn-secondary"
         key={year}
-        onClick={() => this.filterQuotes("year", year)}
+        onClick={() => this.filterQuotes("year", year, quotes)}
       >
         {year}
       </button>
@@ -62,8 +66,15 @@ class QuotesList extends Component {
     return (
       <div>
         <h1>QuotesList</h1>
-        {years.length && this.renderYearButtons(years)}
-        <button className="btn btn-primary">Reset</button>
+        {years.length && (
+          <div>
+            <h3>Filter by Year</h3>
+            {this.renderYearButtons(years)}
+            <button className="btn btn-primary" onClick={this.resetFilter}>
+              Reset
+            </button>
+          </div>
+        )}
         {quotes.length && this.renderQuotes(displayQuotes)}
       </div>
     );
