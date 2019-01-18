@@ -51,11 +51,11 @@ export const addQuoteSuccess = quote => {
   };
 };
 
-export const addQuote = () => dispatch => {
+export const addQuote = (quote) => dispatch => {
   dispatch(addQuoteRequest());
   const token = localStorage.getItem("access_token");
   return axios
-    .post(`${config.API_BASE}/quotes`, { headers: {"x-auth": token} })
+    .post(`${config.API_BASE}/quotes`, quote, { headers: {"x-auth": token} })
     .then(response => {
       dispatch(addQuoteSuccess(response.data));
     })

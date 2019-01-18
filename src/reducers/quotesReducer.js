@@ -19,11 +19,26 @@ export default function(state = initialState, action) {
         quotes: action.payload
       };
     case constants.FETCH_QUOTES_FAILURE:
-    return {
-      ...state,
-      isAuthenticated: false,
-      error: action.payload,
-    }
+      return {
+        ...state,
+        error: action.payload
+      };
+    case constants.ADD_QUOTE_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case constants.ADD_QUOTE_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        quote: action.payload
+      };
+    case constants.ADD_QUOTE_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
     default:
       return state;
   }

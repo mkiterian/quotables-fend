@@ -12,6 +12,10 @@ class AddQuote extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps.quote);
+  }
+
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -73,7 +77,7 @@ class AddQuote extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  quote: state.quotes.quote
 });
 
 export default connect(mapStateToProps, { addQuote })(AddQuote);
