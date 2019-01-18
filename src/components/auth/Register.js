@@ -15,7 +15,7 @@ class Register extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/quotes");
+      this.props.history.push("/view");
     }
   }
 
