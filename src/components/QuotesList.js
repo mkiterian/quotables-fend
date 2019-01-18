@@ -6,31 +6,37 @@ class QuotesList extends Component {
   constructor() {
     super();
     this.state = {
-      quotes: [],
+      quotes: []
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchQuotes();
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     this.setState({
       quotes: nextProps.quotes.quotes
-    })
+    });
   }
 
+  renderQuotes = quotes => {
+    return quotes.map(quote => (
+      <div className="card" key={quote._id}>
+        <div className="card-body">
+          <p>{quote.text}</p>
+          <p> - {quote.author} - {quote.year} </p>
+          </div>
+      </div>
+    ));
+  };
+
   render() {
-    console.log(this.state.quotes);
     const { quotes } = this.state;
     return (
       <div>
         <h1>QuotesList</h1>
-        {
-          quotes.length && quotes.map(quote => (
-            <li key={quote._id}>{ quote.text }</li>
-          ))
-        }
+        {quotes.length && this.renderQuotes(quotes)}
       </div>
     );
   }
@@ -40,4 +46,7 @@ const mapStateToProps = state => ({
   quotes: state.quotes.quotes
 });
 
-export default connect(mapStateToProps, { fetchQuotes })(QuotesList);
+export default connect(
+  mapStateToProps,
+  { fetchQuotes }
+)(QuotesList);
