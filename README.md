@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Notice
+Due to time constraints, the following hasn't been done:
+- error handling
+- proptype validation
+- using protected routes in the front end
+- the ui sucks
+
 ## Available Scripts
 
 In the project directory, you can run:
