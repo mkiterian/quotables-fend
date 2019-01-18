@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { loginUser } from "../../actions/authActions";
+import { login } from "../../actions/authActions";
 
 class Login extends Component {
   constructor() {
@@ -14,7 +14,7 @@ class Login extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/quotes");
+      this.props.history.push("/view");
     }
   }
 
@@ -27,7 +27,7 @@ class Login extends Component {
     const credentials = {
       ...this.state
     };
-    this.props.loginUser(credentials);
+    this.props.login(credentials);
   };
 
   render() {
@@ -75,5 +75,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loginUser }
+  { login }
 )(Login);
