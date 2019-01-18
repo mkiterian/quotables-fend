@@ -20,36 +20,51 @@ class QuotesList extends Component {
     const years = generateUniqueYearslist(nextProps.quotes.quotes);
     this.setState({
       quotes: nextProps.quotes.quotes,
-      years,
+      years
     });
   }
+
+  filterQuotes = (criteria, value) => {
+    const { quotes } = this.state;
+    const filteredQuotes = quotes.filter(quote => quote[criteria] === value);
+    this.setState({ filteredQuotes, showByFilter: true });
+  };
 
   renderQuotes = quotes => {
     return quotes.map(quote => (
       <div className="card" key={quote._id}>
         <div className="card-body">
           <p>{quote.text}</p>
-          <p> - {quote.author} - {quote.year} </p>
-          </div>
+          <p>
+            {" "}
+            - {quote.author} - {quote.year}{" "}
+          </p>
+        </div>
       </div>
     ));
   };
 
   renderYearButtons = years => {
     return years.map(year => (
-      <button className="btn btn-secondary" key={year}>
+      <button
+        className="btn btn-secondary"
+        key={year}
+        onClick={() => this.filterQuotes("year", year)}
+      >
         {year}
       </button>
     ));
-  }
+  };
 
   render() {
-    const { quotes, years } = this.state;
+    const { quotes, years, filteredQuotes, showByFilter } = this.state;
+    const displayQuotes = showByFilter ? filteredQuotes : quotes;
     return (
       <div>
         <h1>QuotesList</h1>
-        { years.length && this.renderYearButtons(years) }
-        { quotes.length && this.renderQuotes(quotes)}
+        {years.length && this.renderYearButtons(years)}
+        <button className="btn btn-primary">Reset</button>
+        {quotes.length && this.renderQuotes(displayQuotes)}
       </div>
     );
   }
