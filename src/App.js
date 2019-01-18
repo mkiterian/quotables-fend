@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import QuotesList from "./components/QuotesList";
+import AddQuote from "./components/AddQuote";
 import "./App.css";
 import store from "./store";
 
@@ -20,6 +21,7 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/quotes" component={QuotesList} />
+              <Route exact path="/create" component={AddQuote} />
             </div>
           </div>
         </BrowserRouter>
