@@ -55,7 +55,27 @@ export const loginSuccess = (user) => {
   }
 );}
 
-export const loginUser = credentials => (
+export const logoutRequest = () => {
+  return {
+    type: constants.LOGOUT_REQUEST,
+  };
+}
+
+export const logoutFailure = error => (
+  {
+    type: constants.LOGOUT_FAILURE,
+    payload: error,
+  }
+);
+
+export const logoutSuccess = () => {
+  return (
+  {
+    type: constants.LOGOUT_SUCCESS,
+  }
+);}
+
+export const login = credentials => (
   (dispatch) => {
     dispatch(loginRequest());
     return axios.post(`${config.API_BASE}/users/login`, credentials)
@@ -64,5 +84,19 @@ export const loginUser = credentials => (
         dispatch(loginSuccess(response.data));
       })
       .catch((error) => { dispatch(loginFailure(error)); });
+  }
+);
+
+export const logout = () => (
+  (dispatch) => {
+    console.log("======> logging out!!!")
+    const token = localStorage.getItem("access_token");
+    dispatch(logoutRequest());
+    return axios.delete(`${config.API_BASE}/users/logout`, { headers: {"x-auth": token}})
+      .then((response) => {
+        localStorage.removeItem("access_token");
+        dispatch(logoutSuccess(response.data));
+      })
+      .catch((error) => { dispatch(logoutFailure(error)); });
   }
 );

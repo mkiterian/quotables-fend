@@ -10,6 +10,7 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case constants.REGISTER_REQUEST:
     case constants.LOGIN_REQUEST:
+    case constants.LOGOUT_REQUEST:
       return {
         ...state,
         isFetching: true
@@ -22,13 +23,26 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         user: action.payload
       };
+    case constants.LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: false,
+      };
     case constants.REGISTER_FAILURE:
     case constants.LOGIN_FAILURE:
-    return {
-      ...state,
-      isAuthenticated: false,
-      error: action.payload,
-    }
+      return {
+        ...state,
+        isAuthenticated: false,
+        isFetching: false,
+        error: action.payload
+      };
+    case constants.LOGOUT_FAILURE:
+      return {
+        ...state,
+        isAuthenticated: true,
+        isFetching: false,
+        error: action.payload
+      };
     default:
       return state;
   }
