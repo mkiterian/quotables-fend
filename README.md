@@ -2,6 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Features
 A user can:
+- Register
 - Login
 - Logout
 - Add a quote
@@ -10,7 +11,7 @@ A user can:
 
 
 ### Note
-Due to time constraints, the following hasn't been done:
+Due to time constraints, the following haven't been done:
 - error handling
 - notifications
 - proptype validation
