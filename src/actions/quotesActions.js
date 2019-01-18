@@ -32,3 +32,34 @@ export const fetchQuotes = () => dispatch => {
       dispatch(fetchQuotesFailure(error));
     });
 };
+
+export const addQuoteRequest = () => {
+  return {
+    type: constants.ADD_QUOTE_REQUEST
+  };
+};
+
+export const addQuoteFailure = error => ({
+  type: constants.ADD_QUOTE_FAILURE,
+  payload: error
+});
+
+export const addQuoteSuccess = quote => {
+  return {
+    type: constants.ADD_QUOTE_SUCCESS,
+    payload: quote
+  };
+};
+
+export const addQuote = () => dispatch => {
+  dispatch(addQuoteRequest());
+  const token = localStorage.getItem("access_token");
+  return axios
+    .post(`${config.API_BASE}/quotes`, { headers: {"x-auth": token} })
+    .then(response => {
+      dispatch(addQuoteSuccess(response.data));
+    })
+    .catch(error => {
+      dispatch(addQuoteFailure(error));
+    });
+};

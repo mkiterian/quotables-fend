@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { addQuote } from "../actions/quotesActions";
 
 class AddQuote extends Component {
   constructor() {
@@ -17,7 +18,8 @@ class AddQuote extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.addQuote();
+    const { text, author, year } = this.state;
+    this.props.addQuote({ text, author, year });
   };
 
   render() {
@@ -74,4 +76,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default AddQuote;
+export default connect(mapStateToProps, { addQuote })(AddQuote);
