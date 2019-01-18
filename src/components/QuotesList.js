@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchQuotes } from "../actions/quotesActions";
+import generateUniqueYearslist from "../utils/generateUniqueYearsList";
 
 class QuotesList extends Component {
   constructor() {
     super();
     this.state = {
-      quotes: []
+      quotes: [],
+      years: []
     };
   }
 
@@ -15,8 +17,10 @@ class QuotesList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const years = generateUniqueYearslist(nextProps.quotes.quotes);
     this.setState({
-      quotes: nextProps.quotes.quotes
+      quotes: nextProps.quotes.quotes,
+      years,
     });
   }
 
@@ -31,12 +35,21 @@ class QuotesList extends Component {
     ));
   };
 
+  renderYearButtons = years => {
+    return years.map(year => (
+      <button className="btn btn-secondary" key={year}>
+        {year}
+      </button>
+    ));
+  }
+
   render() {
-    const { quotes } = this.state;
+    const { quotes, years } = this.state;
     return (
       <div>
         <h1>QuotesList</h1>
-        {quotes.length && this.renderQuotes(quotes)}
+        { years.length && this.renderYearButtons(years) }
+        { quotes.length && this.renderQuotes(quotes)}
       </div>
     );
   }
