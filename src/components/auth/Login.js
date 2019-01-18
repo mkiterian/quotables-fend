@@ -12,6 +12,10 @@ class Login extends Component {
     };
   }
 
+  componentDidMount(){
+    this.props.history.push("/quotes");
+  }
+
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
