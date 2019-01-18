@@ -29,6 +29,7 @@ class Register extends Component {
     const { email, password } = this.state;
     return (
       <div>
+        <h1>Registration Form</h1>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
